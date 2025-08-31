@@ -19,14 +19,22 @@ export class AppComponent{
     setTimeout(()=>{observer.next(1)},1000);
     setTimeout(()=>{observer.next(2)},2000);
     setTimeout(()=>{observer.next(3)},3000);
+    setTimeout(()=>{observer.error(new Error('Something went wrong, please try again later'))},3000);
     setTimeout(()=>{observer.next(4)},4000);
     setTimeout(()=>{observer.next(5)},5000);
+    setTimeout(()=>{observer.complete()},3000);
   });
 
   //subscriber - whenever the observable emits, the subscriber would get notified
   getAsyncData(){
     this.myObservable.subscribe((val:any)=>{
       this.data.push(val);
+    },
+    (err) => {
+      alert(err.message);
+    },
+    ()=>{
+      alert('All the data is streamed');
     });
   }
 
