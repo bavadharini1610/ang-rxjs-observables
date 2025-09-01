@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { from, fromEvent, map, Observable, of } from 'rxjs';
+import { filter, from, fromEvent, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -45,12 +45,18 @@ export class AppComponent implements AfterViewInit{
   promiseData = new Promise((resolve,reject)=>{
     resolve([10,20,30,40,50]);
   })
-  //myObs = 2,4,6,8,10
-  //result-> multiply each by 5 = 10,20,30,40,50
-  myObservable = from([2,4,6,8,10]);
+  //myObs = 2,4,6,8,10,12
+  //result-> multiply each by 5 = 10,20,30,40,50,60
+  myObservable = from([2,4,6,8,10,12]);
 
   transformedObs = this.myObservable.pipe(map((val)=>{
     return val*5;
+  }),filter((val)=>{
+    return val%4===0;
+  }))
+
+  filteredObs = this.transformedObs.pipe(filter((val)=>{
+    return val%4===0;
   }))
 
   //subscriber - whenever the observable emits, the subscriber would get notified
