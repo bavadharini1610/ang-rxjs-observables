@@ -1,10 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-subject',
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.css']
 })
-export class SubjectComponent{
+export class SubjectComponent implements OnInit{
+
+  ngOnInit(): void {
+    //observabe
+    // let obs = new Observable((observer)=>{
+    //   observer.next(Math.random())
+    // })
+
+    //subject
+    const subject = new Subject()
+    //subscriber 1
+    // obs.subscribe((data)=>{
+    //   console.log(data);
+    // })
+
+    // ////subscriber 2
+    // obs.subscribe((data)=>{
+    //   console.log(data);
+    // })
+
+
+
+    subject.subscribe((data)=>{
+      console.log(data);
+    })
+
+    ////subscriber 2
+    subject.subscribe((data)=>{
+      console.log(data);
+    })
+
+    subject.next(Math.random())
+  }
 
 }
