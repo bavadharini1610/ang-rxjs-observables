@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +28,17 @@ export class AppComponent{
   // });
 
   //of operator
-  myObservable = of(this.array1, this.array2, 'A', 10,'Hello');
+  //myObservable = of(this.array1, this.array2, 'A', 10,'Hello');
+
+  //from operator
+  //myObservable = from(this.array1);
+  //myObservable = from('asajds');
+
+  //promise to observable
+  promiseData = new Promise((resolve,reject)=>{
+    resolve([10,20,30,40,50]);
+  })
+  myObservable = from(this.promiseData);
 
   //subscriber - whenever the observable emits, the subscriber would get notified
   getAsyncData(){
