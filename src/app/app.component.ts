@@ -47,7 +47,11 @@ export class AppComponent implements AfterViewInit{
   })
   //myObs = 2,4,6,8,10,12
   //result-> multiply each by 5 = 10,20,30,40,50,60
-  myObservable = from([2,4,6,8,10,12]);
+  myObservable = from([2,4,6,8,10,12]).pipe(map((val)=>{
+    return val*5;
+  }),filter((val)=>{
+    return val%4===0;
+  }));
 
   transformedObs = this.myObservable.pipe(map((val)=>{
     return val*5;
@@ -71,7 +75,7 @@ export class AppComponent implements AfterViewInit{
     //   alert('All the data is streamed');
     // });
 
-    this.transformedObs.subscribe({
+    this.myObservable.subscribe({
       next:(val:any)=>{
         this.data.push(val);
         console.log(val);      },
