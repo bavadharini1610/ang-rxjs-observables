@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { ajax } from 'rxjs/ajax'
 
 @Component({
@@ -32,32 +32,32 @@ export class SubjectComponent implements OnInit{
     //const subject = new BehaviorSubject<number>(100);
 
     //replay subject
-    const subject = new ReplaySubject();
+    // const subject = new ReplaySubject();
 
-    subject.next(100);
-    subject.next(200);
-    subject.next(300);
+    // subject.next(100);
+    // subject.next(200);
+    // subject.next(300);
 
-    subject.subscribe((data)=>{
-      console.log(data);
-    })
+    // subject.subscribe((data)=>{
+    //   console.log(data);
+    // })
 
-    ////subscriber 2
-    subject.subscribe((data)=>{
-      console.log(data);
-    })
+    // ////subscriber 2
+    // subject.subscribe((data)=>{
+    //   console.log(data);
+    // })
 
-    subject.next(2020)
+    // subject.next(2020)
 
-    subject.subscribe((data)=>{
-      console.log(data);
-    })
+    // subject.subscribe((data)=>{
+    //   console.log(data);
+    // })
 
-    subject.next(2023);
+    // subject.next(2023);
 
-    subject.subscribe((data)=>{
-      console.log(data);
-    })
+    // subject.subscribe((data)=>{
+    //   console.log(data);
+    // })
     // const subject = new Subject()
     // const data = ajax('https://randomuser.me/api/');
 
@@ -74,6 +74,17 @@ export class SubjectComponent implements OnInit{
     // })
 
     // data.subscribe(subject);
+
+    const asyncSubject = new AsyncSubject();
+
+    asyncSubject.next(100);
+    asyncSubject.next(200);
+    asyncSubject.next(300);
+    asyncSubject.complete();
+
+    asyncSubject.subscribe((data)=>{
+      console.log(`subscriber 1: ${data}`);
+    })
 
   }
 
